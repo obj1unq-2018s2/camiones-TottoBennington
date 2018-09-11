@@ -15,7 +15,8 @@ object camion{
 	method puedeCircularEnRuta(nivelMaximoPeligrosidad) = cargas.all({
 		carga => carga.peligrosidad()<=nivelMaximoPeligrosidad
 	})
-	method pesoTotal() = cargas.sum({carga => carga.peso()}) + 1000 // sin probar por ahora
+	//not cargas.any(carga => carga.epligrosidad()>nMax)
+	method pesoTotal() = cargas.sum({carga => carga.peso()}) + 1000 
 
 	method excedidoDePeso() = self.pesoTotal() > 2500
 }
@@ -25,9 +26,21 @@ object knightRider{
 	method peligrosidad() = 10
 }
 object bumblebee{
-	var property esAuto = true
+	var property modo = modoAuto
 	method peso() = 800
-	method peligrosidad() = if(esAuto) 15 else 30	
+	method peligrosidad() = modo.peligrosidad()
+}
+
+object modoAuto {
+	
+	method peligrosidad() = 15
+	
+}
+
+object modoRobot {
+	
+	method peligrosidad() = 30
+	
 }
 
 object deposito{
@@ -38,5 +51,10 @@ object deposito{
 	}
 }
 
-// numero.even() es para
+// numero.even() es par
+// numero.odd() impar
 
+/*
+ * Marcar todo ctrl + shift c -> para comentar y descomentar una x cant de lineas
+ * ctrl + barra -> autocompletado de cosas que fueron asignadas a variables
+ */
