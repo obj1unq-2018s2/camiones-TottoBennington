@@ -42,7 +42,46 @@ object modoRobot {
 	method peligrosidad() = 30
 	
 }
-
+object paqueteLadrillo{
+	var property ladrillos = 0
+	method peso() = ladrillos * 2
+	method peligrosidad() = 2
+}
+object arenaAGranel{
+	var property peso = 0
+	const property peligrosidad = 1
+}
+object bateriaAntiAerea{
+	var property misiles = tieneMisiles
+	var property peso = misiles.peso()
+	var property peligrosidad = misiles.peligrosidad()
+}
+object tieneMisiles{
+	const property peso = 300
+	const property peligrosidad = 100
+}
+object noTieneMisiles{
+	const property peso = 200
+	const property peligrosidad = 0
+}
+object contenerdorPortuario{
+	var contenidos = []
+	var property peso = 100 + contenidos.sum({cont=>cont.peso()})
+	method peligrosidad() = if(contenidos.isEmpty()) 0 else contenidos.max({cont => cont.peligrosidad()}).peligrosidad()
+	method agregarContenido(cont){contenidos.add(cont)}
+}
+object residuosRadioactivos{
+	var property peso = 0
+	const property peligrosidad = 200
+}
+object embalajeDeSeguridad{
+	var contenido
+	method contenido(cosa){
+		contenido = cosa
+	}
+	method peso() = contenido.peso()
+	method peligrosidad() = contenido.peligrosidad()/2
+}
 object deposito{
 	var property cosas = []
 	
